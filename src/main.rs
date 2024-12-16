@@ -26,6 +26,29 @@ impl Calibration {
     }
 }
 
+fn algo(cal: Calibration) {
+    //faire en sorte que la fonction elle traite qu'une opération entre 2 chifrre               fonction récursive
+    //elle se rapelle elle meme avec le nouvelle argument et le chiffre d'apres (ne pas se rappler si il n'y a pas de chiffre apres)
+    //copîer le vec et modifier le vec copier en retirzant les chiffre copier en soit les additionant soir en les multilpiant
+    let mut vec_copie1 = Calibration::tmp2_5.clone();
+    let mut vec_copie2 = Calibration::tmp2_5.clone();
+    let mut nmbr1 = vec_copie1[0];
+    let mut nmbr2 = vec_copie1[1];
+
+
+    let mut encrs1 = nmbr1 + nmbr2;
+    let mut encrs2 = nmbr1 * nmbr2;
+
+    vec_copie1.remove(0);
+    vec_copie1.remove(0);
+    vec_copie1.insert(0, encrs1);
+
+    vec_copie2.remove(0);
+    vec_copie2.remove(0);
+    vec_copie2.insert(0, encrs2);
+}
+
+
 fn main() -> Result<()> {
     //tableau
     let mut buffer = String::new();
