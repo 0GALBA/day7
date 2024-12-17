@@ -48,13 +48,19 @@ fn algo(cal: Calibration, nombre_non_traité:Vec<i32> ) {
     vec_copie2.remove(0);
     vec_copie2.insert(0, encrs2);
 
-    if cal.potentiel_résultat != ???{
-        
+    if cal.potentiel_résultat != vec_copie1{
+        reponce += vec_copie1
     }
+    if cal.potentiel_résultat != vec_copie2{
+        reponce += vec_copie2
+    }
+    //appler algo avec comme argument cal et vec copie 1 et 2
+    //que algo retourne un bool
 }
 
 fn main() -> Result<()> {
     //tableau
+    let mut résulta = 0;
     let mut buffer = String::new();
     let mut f = File::open("data.csv")?;
     f.read_to_string(&mut buffer)?;
