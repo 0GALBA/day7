@@ -2,6 +2,7 @@ use std::{fs::File, io::Read};
 use std::io::Result;
 use std::str::FromStr;
 
+#[derive(Debug)]
 struct Calibration{
     potentiel_résultat: i64,
     nombre_non_traité : Vec<i64>,
@@ -28,7 +29,7 @@ impl Calibration {
     }
 }
 
-fn algo(potentiel_résultat: i64, nombre_non_traité:Vec<i64> ) -> bool {
+fn algo(potentiel_résultat: i64, nombre_non_traité:&Vec<i64> ) -> bool {
     //faire en sorte que la fonction elle traite qu'une opération entre 2 chifrre               fonction récursive
     //elle se rapelle elle meme avec le nouvelle argument et le chiffre d'apres (ne pas se rappler si il n'y a pas de chiffre apres)
     //copîer le vec et modifier le vec copier en retirzant les chiffre copier en soit les additionant soir en les multilpiant
@@ -61,14 +62,14 @@ fn algo(potentiel_résultat: i64, nombre_non_traité:Vec<i64> ) -> bool {
         vec_copie2.remove(0);
         vec_copie2.insert(0, encrs2);
     
-        if encrs1 < potentiel_résultat {
-            if algo(potentiel_résultat, vec_copie1) {
+        if encrs1 <= potentiel_résultat {
+            if algo(potentiel_résultat, &vec_copie1) {
                 return true;
             }
         }
     
-        if encrs2 < potentiel_résultat {
-            if algo(potentiel_résultat, vec_copie2) {
+        if encrs2 <= potentiel_résultat {
+            if algo(potentiel_résultat, &vec_copie2) {
                 return true;
             }
         }
@@ -88,7 +89,8 @@ fn main() -> Result<()> {
     let lignes = buffer.split('\n');
     for ligne in lignes {
         let cal = Calibration::new_from_string(ligne);
-        if algo(cal.potentiel_résultat, cal.nombre_non_traité) == true {
+        if algo(cal.potentiel_résultat, &cal.nombre_non_traité) == true {
+            println!("TRUE: {:?}", cal);
             reponceeeeeeeeeee += cal.potentiel_résultat;
         }
     }
